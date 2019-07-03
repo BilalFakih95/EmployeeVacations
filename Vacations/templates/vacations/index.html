@@ -1,0 +1,39 @@
+{% extends './base.html' %}
+
+
+{% block content %}
+    <h1 class="mt-4">List of Vacations</h1>
+    <hr>
+
+    <a href="{% url 'vacations:create' %}" class="btn btn-primary mb-5">Add New Vacation</a>
+
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Vacation Description</th>
+                <th>Date From</th>
+                <th>Date To</th>
+                <th>Edit/Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for vacation in vacations %}
+            <tr>
+                <td>{{ vacation.vacation_desc }}</td>
+                <td>{{ vacation.date_from }}</td>
+                <td>{{ vacation.date_to }}</td>
+                <td>
+                    <a href="{% url 'vacations:update' vacation.id %}">
+                        <button class="btn btn-warning btn-sm mr-2">Edit</button>
+                    </a>
+                    <a href="{% url 'vacations:delete' vacation.id %}">
+                        <button class="btn btn-danger btn-sm ml-2">Delete</button>
+                    </a>
+                </td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
